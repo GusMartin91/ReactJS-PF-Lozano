@@ -17,17 +17,10 @@ export const Navbar = () => {
           <li>Todos</li>
           <li>Acero Templado</li>
           <li>Hierro Dulce</li>
-          <li>
-            <CartWidget />
-          </li>
         </ul>
       </Grid>
-      <Grid item xs={3} className="imgUserP">
-        <img
-          className="imgUser"
-          src="https://res.cloudinary.com/dbzngohkz/image/upload/v1695699297/pngwing.com_5_pcusov.png"
-          alt="user usuario profile logo"
-        />
+      <Grid item xs={3} className="carrito">
+        <CartWidget />
       </Grid>
     </Grid>
   );

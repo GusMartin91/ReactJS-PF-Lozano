@@ -5,6 +5,8 @@ import { Footer } from "./components/layout/footer/Footer";
 import CounterContainer from "./components/common/counter/CounterContainer";
 import { useState } from "react";
 import { Button, Stack } from "@mui/material";
+import customTheme from "./themeConfig";
+import { ThemeProvider } from "@emotion/react";
 
 function App() {
   let usuario = "GusLozano";
@@ -12,12 +14,16 @@ function App() {
   const [montar, setMontar] = useState(false);
 
   return (
-    <div>
+    <ThemeProvider theme={customTheme}>
       <Navbar />
       <Home />
       <br />
       <Stack direction="row" justifyContent={"center"}>
-        <Button variant="contained" onClick={() => setMontar(!montar)}>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => setMontar(!montar)}
+        >
           Montar / Desmontar
         </Button>
       </Stack>
@@ -30,7 +36,7 @@ function App() {
       <br />
       {montar && <CounterContainer stock={4} />}
       <Footer />
-    </div>
+    </ThemeProvider>
   );
 }
 

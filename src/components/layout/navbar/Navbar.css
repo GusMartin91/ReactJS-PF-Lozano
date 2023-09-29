@@ -2,19 +2,15 @@
   width: 100%;
   height: 100px;
   display: flex;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(237, 211, 244, 1) 90%,
-    rgba(218, 186, 224, 1) 100%
-  );
+  background: linear-gradient(180deg, #b9e6e6 0%, #51a3a3 90%, #338a8a 100%);
   justify-content: space-between;
   align-items: center;
 }
 .imgLogo {
   max-width: 150px;
 }
-.imgUserP {
+.carrito {
+  padding-right: 50px;
   display: flex;
   justify-content: flex-end;
 }
@@ -26,18 +22,21 @@
 }
 .listaNavBar {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 }
 .listaNavBar li {
-  background-color: #e3cebd;
-  padding: 10px 15px;
-  color: #725b75;
+  padding: 10px 5px;
+  color: #363537;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 18px;
-  font-weight: bolder;
-  width: 170px;
+  width: 160px;
   display: flex;
   justify-content: center;
   border-radius: 15px;
+}
+.listaNavBar :hover {
+  font-size: 20px;
+  cursor: pointer;
 }

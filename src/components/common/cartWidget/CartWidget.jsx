@@ -17,7 +17,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const CartWidget = () => {
   return (
-    <IconButton aria-label="cart">
+    <IconButton color="tertiary" aria-label="cart">
       <StyledBadge badgeContent={cantCarrito} color="secondary" max={99}>
         <ShoppingCartIcon />
       </StyledBadge>

@@ -5,7 +5,11 @@ const Counter = ({ restar, sumar, contador, setContador }) => {
       <Button variant="outlined" onClick={restar}>
         Quitar
       </Button>
-      <Button variant="contained" onClick={() => setContador(0)}>
+      <Button
+        color="secondary"
+        variant="contained"
+        onClick={() => setContador(0)}
+      >
         {contador}
       </Button>
       <Button variant="outlined" onClick={sumar}>
