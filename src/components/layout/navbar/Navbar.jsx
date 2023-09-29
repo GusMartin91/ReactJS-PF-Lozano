@@ -18,7 +18,7 @@ export const Navbar = () => {
           <li>Acero Templado</li>
           <li>Hierro Dulce</li>
           <li>
-            <CartWidget />| Carrito
+            <CartWidget />
           </li>
         </ul>
       </Grid>
