@@ -19,7 +19,7 @@ const CartWidget = () => {
   return (
     <IconButton color="tertiary" aria-label="cart">
       <StyledBadge badgeContent={cantCarrito} color="secondary" max={99}>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon sx={{ fontSize: 30 }} />
       </StyledBadge>
     </IconButton>
   );

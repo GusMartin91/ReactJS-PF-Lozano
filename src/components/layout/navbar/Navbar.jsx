@@ -8,7 +8,7 @@ export const Navbar = () => {
       <Grid item xs={3}>
         <img
           className="imgLogo"
-          src="https://res.cloudinary.com/dbzngohkz/image/upload/v1695697049/pngwing.com_4_ysc5xl.png"
+          src="https://res.cloudinary.com/dbzngohkz/image/upload/v1696021826/pngwing.com_e4_dprhrr.png"
           alt="bulon tuerca logo"
         />
       </Grid>
