@@ -1,4 +1,4 @@
-let products = [
+export let products = [
     {
         "id": 1,
         "title": "BULON CABEZA HEXAGONAL CALIDAD 4.6 DIN 931",
@@ -24,7 +24,7 @@ let products = [
         "title": "BULON CABEZA HEXAGONAL CALIDAD 8.8 DIN 931",
         "price": 210,
         "description": "Acero templado. Rosca - Metrico MA (Paso Grueso). DIN 931 con cuello. Terminación Zincado electrolítico Dorado",
-        "stock": 1,
+        "stock": 23,
         "category": "Acero Templado",
         "img": "https://res.cloudinary.com/dbzngohkz/image/upload/v1696015565/3_oupuam.png",
         "alt": "bulon tornillo rosca metal acero hierro"

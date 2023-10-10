@@ -1,9 +1,10 @@
 import { Button, Stack } from "@mui/material";
-const Counter = ({ restar, sumar, contador, setContador }) => {
+import { Add, Remove } from "@mui/icons-material";
+const Counter = ({ restar, sumar, contador, setContador, onAdd }) => {
   return (
     <Stack spacing={2} direction="row">
       <Button variant="outlined" onClick={restar}>
-        Quitar
+        <Remove />
       </Button>
       <Button
         color="secondary"
@@ -13,7 +14,10 @@ const Counter = ({ restar, sumar, contador, setContador }) => {
         {contador}
       </Button>
       <Button variant="outlined" onClick={sumar}>
-        Agregar
+        <Add />
+      </Button>
+      <Button variant="contained" onClick={() => onAdd(contador)}>
+        ¡Agregar al Carrito!
       </Button>
     </Stack>
   );

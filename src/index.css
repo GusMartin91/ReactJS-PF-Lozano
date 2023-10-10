@@ -4,3 +4,6 @@
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
 }
+#root {
+  margin-bottom: 50px;
+}
