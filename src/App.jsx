@@ -1,5 +1,4 @@
 import { Navbar } from "./components/layout/navbar/Navbar";
-import { Home } from "./components/pages/home/Home";
 import ItemListContainer from "./components/pages/itemListContainer/ItemListContainer";
 import { Footer } from "./components/layout/footer/Footer";
 import customTheme from "./themeConfig";
@@ -22,8 +21,9 @@ function App() {
             }
           >
             <Route path="/" element={<ItemListContainer />} />
+            <Route path="/category/:category" element={<ItemListContainer />} />
             <Route
-              path="/category/:categoryName"
+              path="/ordenPrecio/:precio"
               element={<ItemListContainer />}
             />
             <Route path="/cart" element={<CartListContainer />} />

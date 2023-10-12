@@ -20,23 +20,8 @@
   width: 150px;
   border-radius: 20%;
 }
-.listaNavBar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-.listaNavBar li {
-  padding: 10px 5px;
-  color: #363537;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  width: 160px;
-  display: flex;
-  justify-content: center;
-  border-radius: 15px;
-}
-.listaNavBar :hover {
-  font-size: 20px;
-  cursor: pointer;
+h1 {
+  text-align: center;
+  color: #725b75;
+  text-decoration: underline;
 }

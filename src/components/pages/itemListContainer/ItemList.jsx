@@ -1,22 +1,34 @@
 import { Container, Grid } from "@mui/material";
 import ProductCard from "../../common/productCard/ProductCard";
-import "./ItemList.css";
+import SideBar from "../../layout/sideBar/SideBar";
 const ItemList = ({ items }) => {
   return (
-    <>
-      <h1>Bulones - EL PITUTO</h1>
-      <Container>
-        <Grid container sx={{ justifyContent: "space-around", rowGap: 6 }}>
-          {items.map((item) => {
-            return (
-              <Grid key={item.id} item sx={{ maxWidth: "333px" }}>
-                <ProductCard item={item} />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
-    </>
+    <Grid
+      container
+      sx={{
+        marginTop: "40px",
+        justifyContent: "space-between",
+      }}
+    >
+      <Grid sx={{ padding: "0 20px 20px 20px" }}>
+        <SideBar />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        md={10}
+        container
+        sx={{ justifyContent: "space-evenly", rowGap: 2 }}
+      >
+        {items.map((item) => {
+          return (
+            <Grid key={item.id} item sx={{ maxWidth: "333px" }}>
+              <ProductCard item={item} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Grid>
   );
 };
 

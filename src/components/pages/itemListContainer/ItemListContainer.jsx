@@ -1,17 +1,27 @@
 import { useEffect, useState } from "react";
-import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
 import { products } from "../../../productsMock";
+import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
+  const { category } = useParams();
+  const { precio } = useParams();
 
   useEffect(() => {
-    const tarea = new Promise((resolve, reject) => {
-      resolve(products);
-    });
+    let prodFiltrados = products.filter((product) =>
+      category ? product.category === category : true
+    );
 
-    tarea.then((res) => setItems(res)).catch((error) => console.log(error));
-  }, []);
+    if (precio === "menor") {
+      prodFiltrados = prodFiltrados.sort((a, b) => a.price - b.price);
+    } else if (precio === "mayor") {
+      prodFiltrados = prodFiltrados.sort((a, b) => b.price - a.price);
+    }
+
+    setItems(prodFiltrados);
+  }, [category, precio]);
+
   return <ItemList items={items} />;
 };
 

@@ -1,0 +1,19 @@
+.listaNavBar {
+  display: flex;
+  flex-direction: column;
+}
+.listaNavBar li {
+  margin: 5px;
+  color: #725b75;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  display: flex;
+}
+.listaNavBar li :hover {
+  font-size: 20px;
+  cursor: pointer;
+}
+.pLista {
+  padding: 0px 0 10px 0;
+  color: #186e6e;
+}

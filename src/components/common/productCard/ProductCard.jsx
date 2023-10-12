@@ -13,12 +13,14 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ item }) => {
   return (
     <Card sx={{ border: "1px solid #ccc" }}>
-      <CardMedia
-        sx={{ height: 170 }}
-        image={item.img}
-        title={`image ${item.title}`}
-        alt={item.alt}
-      />
+      <Link to={`/itemDetail/${item.id}`}>
+        <CardMedia
+          sx={{ height: 170 }}
+          image={item.img}
+          title={`image ${item.title}`}
+          alt={item.alt}
+        />
+      </Link>
       <CardContent sx={{ height: "200px" }} className="elPrecio">
         <Box>
           <Typography gutterBottom variant="body1" component="div">
@@ -34,9 +36,16 @@ const ProductCard = ({ item }) => {
           </Typography>
         </Box>
       </CardContent>
-      <CardActions>
+      <Typography
+        textAlign={"center"}
+        variant="body2"
+        color={item.stock === 0 ? "error" : "#68d42a"}
+      >
+        {item.stock === 0 ? "¡Sin Stock!" : "¡Disponible!"}
+      </Typography>
+      <CardActions sx={{ justifyContent: "center" }}>
         <Link to={`/itemDetail/${item.id}`}>
-          <Button size="small" variant="outlined">
+          <Button size="small" variant="contained">
             Ver detalle
           </Button>
         </Link>

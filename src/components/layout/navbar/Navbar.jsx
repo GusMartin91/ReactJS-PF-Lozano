@@ -16,12 +16,10 @@ export const Navbar = () => {
             />
           </Link>
         </Grid>
-        <Grid item xs={6}>
-          <ul className="listaNavBar">
-            <li>Todos</li>
-            <li>Acero Templado</li>
-            <li>Hierro Dulce</li>
-          </ul>
+        <Grid item xs={3}>
+          <Link to="/">
+            <h1>Bulones - EL PITUTO</h1>
+          </Link>
         </Grid>
         <Grid item xs={3} className="carrito">
           <CartWidget />
