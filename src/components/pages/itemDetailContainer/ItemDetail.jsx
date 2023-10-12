@@ -62,17 +62,20 @@ const ItemDetail = ({ productSelected, onAdd }) => {
           <b>Precio: $ {productSelected.price}.-</b>
         </Typography>
         {productSelected.stock > 0 ? (
-          <Typography
-            sx={{
-              margin: "10px 0 40px 0",
-              display: "flex",
-              justifyContent: "end",
-            }}
-            color="#68d42a"
-            variant="h6"
-          >
-            ¡Stock Disponible! - <b>({productSelected.stock})</b>
-          </Typography>
+          <>
+            <Typography
+              sx={{
+                margin: "10px 0 40px 0",
+                display: "flex",
+                justifyContent: "end",
+              }}
+              color="#68d42a"
+              variant="h6"
+            >
+              ¡Stock Disponible! - <b>({productSelected.stock})</b>
+            </Typography>
+            <CounterContainer stock={productSelected.stock} onAdd={onAdd} />
+          </>
         ) : (
           <Typography
             sx={{
@@ -86,7 +89,6 @@ const ItemDetail = ({ productSelected, onAdd }) => {
             ¡Sin Stock!
           </Typography>
         )}
-        <CounterContainer stock={productSelected.stock} onAdd={onAdd} />
       </Grid>
     </Grid>
   );

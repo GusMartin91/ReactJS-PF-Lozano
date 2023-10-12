@@ -34,7 +34,7 @@ export let products = [
         "title": "BULON CABEZA HEXAGONAL CALIDAD 8.8 ROSCA MB DIN 960",
         "price": 235,
         "description": "Acero templado. Rosca - Metrico MB (Paso Fino). DIN 960 con cuello. Terminación Zincado electrolítico Dorado",
-        "stock": 10,
+        "stock": 0,
         "category": "Acero Templado",
         "img": "https://res.cloudinary.com/dbzngohkz/image/upload/v1696015565/3_oupuam.png",
         "alt": "bulon tornillo rosca metal acero hierro"
@@ -94,7 +94,7 @@ export let products = [
         "title": "BULON CABEZA HEXAGONAL GRADO 5 ROSCA WTW",
         "price": 340,
         "description": "Acero templado. Rosca - Pulgada WTW (Paso Grueso). Terminación Zincado electrolítico Dorado",
-        "stock": 9,
+        "stock": 0,
         "category": "Acero Templado",
         "img": "https://res.cloudinary.com/dbzngohkz/image/upload/v1696015565/10_q6kqdt.png",
         "alt": "bulon tornillo rosca metal acero hierro"
