@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, Typography, Paper } from "@mui/material";
 import CounterContainer from "../../common/counter/CounterContainer";
-import { BorderAllRounded, RoundedCorner } from "@mui/icons-material";
 
 const ItemDetail = ({ productSelected, onAdd }) => {
   return (
@@ -10,23 +9,69 @@ const ItemDetail = ({ productSelected, onAdd }) => {
       spacing={2}
       sx={{
         padding: "40px",
-        backgroundColor: "red",
+        justifyContent: "space-evenly",
       }}
     >
       <Grid item xs={12} md={6}>
         {/* Aquí va la imagen grande */}
         <img
-          style={{ borderRadius: "10%" }}
+          style={{
+            borderRadius: "10%",
+          }}
           src={productSelected.img}
           alt={productSelected.title}
         />
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        sx={{
+          borderRadius: "10%",
+        }}
+      >
         {/* Aquí va la descripción del producto */}
-        <Typography variant="h3">{productSelected.title}</Typography>
-        <Typography variant="body1">{productSelected.description}</Typography>
-        <Typography variant="h3">Stock Disponible</Typography>
-        {/* Aquí el contador */}
+        <Typography
+          sx={{ margin: "10px 0 20px 0" }}
+          color="primary"
+          variant="h4"
+        >
+          <b>{productSelected.category}</b>
+        </Typography>
+        <Typography
+          sx={{ margin: "10px 0 10px 0" }}
+          color="primary"
+          variant="h5"
+        >
+          <b>{productSelected.title}</b>
+        </Typography>
+        <Typography
+          sx={{ margin: "30px 0 30px 0" }}
+          color="secondary"
+          variant="body1"
+        >
+          {productSelected.description}
+        </Typography>
+        <Typography
+          sx={{
+            margin: "20px 0 20px 0",
+          }}
+          color="primary"
+          variant="h6"
+        >
+          <b>Precio: $ {productSelected.price}.-</b>
+        </Typography>
+        <Typography
+          sx={{
+            margin: "10px 0 40px 0",
+            display: "flex",
+            justifyContent: "end",
+          }}
+          color="primary"
+          variant="h6"
+        >
+          ¡Stock Disponible! - <b>({productSelected.stock})</b>
+        </Typography>
         <CounterContainer stock={productSelected.stock} onAdd={onAdd} />
       </Grid>
     </Grid>

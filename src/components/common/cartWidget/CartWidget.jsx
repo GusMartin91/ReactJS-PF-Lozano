@@ -3,6 +3,7 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 let cantCarrito = 123;
 
@@ -17,11 +18,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const CartWidget = () => {
   return (
-    <IconButton color="tertiary" aria-label="cart">
-      <StyledBadge badgeContent={cantCarrito} color="secondary" max={99}>
-        <ShoppingCartIcon sx={{ fontSize: 30 }} />
-      </StyledBadge>
-    </IconButton>
+    <Link to="/cart">
+      <IconButton color="tertiary" aria-label="cart">
+        <StyledBadge badgeContent={cantCarrito} color="secondary" max={99}>
+          <ShoppingCartIcon sx={{ fontSize: 30 }} />
+        </StyledBadge>
+      </IconButton>
+    </Link>
   );
 };
 
