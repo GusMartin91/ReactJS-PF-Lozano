@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
 }
+body {
+  background-color: #eeeeee;
+}
 #root {
   background-color: #eeeeee;
   margin-bottom: 50px;
