@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import Counter from "./Counter";
-
-const CounterContainer = ({ stock, onAdd }) => {
-  const [contador, setContador] = useState(1);
-
+import Swal from "sweetalert2";
+const CounterContainer = ({ stock, onAdd, totalQuantity = 1 }) => {
+  const [contador, setContador] = useState(totalQuantity);
   const sumar = () => {
     if (contador < stock) {
       setContador(contador + 1);
     } else {
-      alert("Cantidad Maxima!");
+      Swal.fire({
+        icon: "warning",
+        title: "Cantidad Máxima alcanzada",
+        text: "No puedes agregar más unidades de este producto.",
+      });
     }
   };
   const restar = () => {
-    if (contador > 0) {
+    if (contador > 1) {
       setContador(contador - 1);
-    } else {
-      alert("Carrito Vacio!");
     }
   };
   console.log("Actualizacion");

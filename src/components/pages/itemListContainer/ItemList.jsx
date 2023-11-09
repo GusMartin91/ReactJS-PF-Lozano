@@ -11,7 +11,9 @@ const ItemList = ({ items }) => {
       }}
     >
       <Grid sx={{ padding: "0 20px 20px 20px" }}>
-        <SideBar />
+        <div style={{ position: "sticky", top: "120px", zIndex: 1 }}>
+          <SideBar />
+        </div>
       </Grid>
       <Grid
         item

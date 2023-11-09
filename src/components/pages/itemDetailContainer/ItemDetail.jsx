@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Typography, Paper } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CounterContainer from "../../common/counter/CounterContainer";
 
-const ItemDetail = ({ productSelected, onAdd }) => {
+const ItemDetail = ({ productSelected, onAdd, totalQuantity }) => {
   return (
     <Grid
       container
@@ -74,7 +74,11 @@ const ItemDetail = ({ productSelected, onAdd }) => {
             >
               ¡Stock Disponible! - <b>({productSelected.stock})</b>
             </Typography>
-            <CounterContainer stock={productSelected.stock} onAdd={onAdd} />
+            <CounterContainer
+              stock={productSelected.stock}
+              onAdd={onAdd}
+              totalQuantity={totalQuantity}
+            />
           </>
         ) : (
           <Typography

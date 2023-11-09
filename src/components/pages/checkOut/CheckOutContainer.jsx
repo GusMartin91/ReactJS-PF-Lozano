@@ -1,12 +1,12 @@
 import CheckOut from "./CheckOut";
 
 const CheckOutContainer = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
+  // const [nombre, setNombre] = useState("");
+  // const [apellido, setApellido] = useState("");
 
-  const capturarNombre = (e) => {
-    setNombre(e.target.value);
-  };
+  // const capturarNombre = (e) => {
+  //   setNombre(e.target.value);
+  // };
 
   return <CheckOut />;
 };

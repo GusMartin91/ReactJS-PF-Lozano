@@ -31,7 +31,11 @@ const ProductCard = ({ item }) => {
           </Typography>
         </Box>
         <Box>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            style={{ fontWeight: "900", fontSize: "1.1rem" }}
+          >
             <br />$ {item.price} .-
           </Typography>
         </Box>
