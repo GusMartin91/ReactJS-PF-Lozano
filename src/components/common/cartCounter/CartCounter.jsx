@@ -3,7 +3,7 @@ import { Add, Remove, Delete } from "@mui/icons-material";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const CartCounter = ({ stock, initialCount }) => {
+const CartCounter = ({ stock, initialCount, eliminarProductoPorID, id }) => {
   const [contador, setContador] = useState(initialCount);
 
   const sumar = () => {
@@ -33,8 +33,6 @@ const CartCounter = ({ stock, initialCount }) => {
         cancelButtonText: "No, mantenerlo en el carrito",
       }).then((result) => {
         if (result.isConfirmed) {
-          // Lógica para eliminar el producto del carrito
-          // Puedes llamar a una función para realizar la eliminación aquí
         }
       });
     }
@@ -61,7 +59,7 @@ const CartCounter = ({ stock, initialCount }) => {
       <IconButton color="primary" onClick={sumar}>
         <Add />
       </IconButton>
-      <IconButton color="error" onClick={() => onRemove()}>
+      <IconButton color="error" onClick={() => eliminarProductoPorID(id)}>
         <Delete />
       </IconButton>
     </Stack>

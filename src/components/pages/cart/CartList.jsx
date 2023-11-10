@@ -7,6 +7,7 @@ import {
   Typography,
   Grid,
   Container,
+  Box,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext } from "react";
@@ -16,7 +17,15 @@ import CartCounter from "../../common/cartCounter/CartCounter";
 import Swal from "sweetalert2";
 
 const CartList = () => {
-  const { cart, emptyCart } = useContext(CartContext);
+  const {
+    cart,
+    emptyCart,
+    deleteProductById,
+    getTotalQuantity,
+    getTotalPrice,
+  } = useContext(CartContext);
+
+  let precioTotal = getTotalPrice();
 
   const vaciarCarrito = () => {
     Swal.fire({
@@ -33,27 +42,51 @@ const CartList = () => {
       }
     });
   };
+  const eliminarProductoPorID = (productId) => {
+    Swal.fire({
+      title: "¿Estás seguro de que deseas eliminar este producto?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar producto",
+      cancelButtonText: "No, mantener el producto",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProductById(productId);
+      }
+    });
+  };
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: "20px", marginBottom: "20px" }}>
       <h1 style={{ margin: "25px", textAlign: "center" }}>
         ¡Estoy en el Carrito!
       </h1>
-      <Button
-        variant="contained"
-        onClick={vaciarCarrito}
+      <Box
         sx={{
-          marginBottom: "20px",
-          backgroundColor: "crimson",
-          color: "white",
-          "&:hover": {
-            backgroundColor: "darkred",
-          },
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "20px",
         }}
-        startIcon={<DeleteIcon />}
       >
-        Vaciar Carrito
-      </Button>
+        <Button
+          variant="contained"
+          onClick={vaciarCarrito}
+          sx={{
+            marginTop: "-50px",
+            marginBottom: "20px",
+            backgroundColor: "crimson",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "darkred",
+            },
+          }}
+          startIcon={<DeleteIcon />}
+        >
+          Vaciar Carrito
+        </Button>
+      </Box>
       <Grid container spacing={2} justifyContent="center">
         {cart.map((product) => (
           <Grid item key={product.id}>
@@ -88,6 +121,8 @@ const CartList = () => {
                 <CartCounter
                   stock={product.stock}
                   initialCount={product.quantity}
+                  id={product.id}
+                  eliminarProductoPorID={eliminarProductoPorID}
                 />
               </CardActions>
             </Card>
@@ -103,7 +138,10 @@ const CartList = () => {
         }}
       >
         <Button variant="contained" sx={{ margin: "20px" }}>
-          ¡Ir Al Pago!
+          Total a Pagar: {" "}
+          <span style={{ fontWeight: "bolder", fontSize: "18px" }}>
+            ${precioTotal.toFixed(2)}.-
+          </span>
         </Button>
       </Link>
     </Container>

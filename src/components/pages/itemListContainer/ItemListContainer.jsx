@@ -1,25 +1,40 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../../../productsMock";
 import ItemList from "./ItemList";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  addDoc,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../../../firebaseConfig";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { category } = useParams();
   const { precio } = useParams();
-
   useEffect(() => {
-    let prodFiltrados = products.filter((product) =>
-      category ? product.category === category : true
-    );
-
+    let productsCollection = collection(db, "products");
+    let consulta;
+    if (!category) {
+      consulta = productsCollection;
+    } else {
+      consulta = query(productsCollection, where("category", "==", category));
+    }
     if (precio === "menor") {
-      prodFiltrados = prodFiltrados.sort((a, b) => a.price - b.price);
+      consulta = query(consulta, orderBy("price", "asc"));
     } else if (precio === "mayor") {
-      prodFiltrados = prodFiltrados.sort((a, b) => b.price - a.price);
+      consulta = query(consulta, orderBy("price", "desc"));
     }
 
-    setItems(prodFiltrados);
+    getDocs(consulta).then((res) => {
+      let productsArr = res.docs.map((product) => {
+        return { ...product.data(), id: product.id };
+      });
+      setItems(productsArr);
+    });
   }, [category, precio]);
 
   return <ItemList items={items} />;
