@@ -6,17 +6,16 @@ const ItemDetail = ({ productSelected, onAdd, totalQuantity }) => {
   return (
     <Grid
       container
-      spacing={2}
       sx={{
-        padding: "40px",
+        padding: "20px 180px 0 180px",
         justifyContent: "space-evenly",
       }}
     >
       <Grid item xs={12} md={6}>
-        {/* Aquí va la imagen grande */}
         <img
           style={{
             borderRadius: "10%",
+            width: "100%",
           }}
           src={productSelected.img}
           alt={productSelected.title}
@@ -30,10 +29,10 @@ const ItemDetail = ({ productSelected, onAdd, totalQuantity }) => {
           borderRadius: "10%",
         }}
       >
-        {/* Aquí va la descripción del producto */}
         <Typography
-          sx={{ margin: "10px 0 20px 0" }}
+          sx={{ margin: "10px 0 10px 0" }}
           color="primary"
+          fontSize={32}
           variant="h4"
         >
           <b>{productSelected.category}</b>
@@ -46,26 +45,32 @@ const ItemDetail = ({ productSelected, onAdd, totalQuantity }) => {
           <b>{productSelected.title}</b>
         </Typography>
         <Typography
-          sx={{ margin: "30px 0 30px 0" }}
+          sx={{ margin: "10px 0 10px 0" }}
           color="secondary"
           variant="body1"
         >
           {productSelected.description}
         </Typography>
-        <Typography
-          sx={{
-            margin: "20px 0 20px 0",
-          }}
-          color="primary"
-          variant="h6"
-        >
-          <b>Precio: $ {productSelected.price}.-</b>
-        </Typography>
+        <div>
+          <Typography
+            sx={{
+              margin: "15px 0 15px 0",
+              border: "2px solid #aaa",
+              display: "flex",
+              justifyContent: "center",
+              width: "60%",
+            }}
+            color="primary"
+            variant="h6"
+          >
+            <b>Precio: $ {productSelected.price}.-</b>
+          </Typography>
+        </div>
         {productSelected.stock > 0 ? (
           <>
             <Typography
               sx={{
-                margin: "10px 0 40px 0",
+                margin: "10px 0 30px 0",
                 display: "flex",
                 justifyContent: "end",
               }}

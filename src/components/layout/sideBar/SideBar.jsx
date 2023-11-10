@@ -1,7 +1,25 @@
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./SideBar.css";
+import { useEffect, useState } from "react";
+import { db } from "../../../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+
 const SideBar = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const categoriesCollection = collection(db, "categories");
+    getDocs(categoriesCollection)
+      .then((res) => {
+        let arrayCategories = res.docs.map((category) => {
+          return { ...category.data(), id: category.id };
+        });
+        setCategories(arrayCategories);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Grid>
       <ul className="listaNavBar">
@@ -10,12 +28,11 @@ const SideBar = () => {
         <Link to={`/`}>
           <li>Todos</li>
         </Link>
-        <Link to={`/category/Acero Templado`}>
-          <li>Acero Templado</li>
-        </Link>
-        <Link to={`/category/Hierro Dulce`}>
-          <li>Hierro Dulce</li>
-        </Link>
+        {categories.map((category) => (
+          <Link key={category.id} to={category.path}>
+            <li>{category.name}</li>
+          </Link>
+        ))}
         <br />
         <p className="pLista">Ordenar por:</p>
         <Link to={`/ordenPrecio/menor`}>

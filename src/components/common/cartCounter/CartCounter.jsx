@@ -3,12 +3,20 @@ import { Add, Remove, Delete } from "@mui/icons-material";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const CartCounter = ({ stock, initialCount, eliminarProductoPorID, id }) => {
+const CartCounter = ({
+  stock,
+  initialCount,
+  eliminarProductoPorID,
+  id,
+  restaCart,
+  sumaCart,
+}) => {
   const [contador, setContador] = useState(initialCount);
 
   const sumar = () => {
     if (contador < stock) {
       setContador(contador + 1);
+      sumaCart(id);
     } else {
       Swal.fire({
         icon: "warning",
@@ -21,47 +29,56 @@ const CartCounter = ({ stock, initialCount, eliminarProductoPorID, id }) => {
   const restar = () => {
     if (contador > 1) {
       setContador(contador - 1);
-    } else {
-      Swal.fire({
-        icon: "question",
-        title: "¿Deseas eliminar este producto del carrito?",
-        text: "Si confirmas, el producto se eliminará del carrito.",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "No, mantenerlo en el carrito",
-      }).then((result) => {
-        if (result.isConfirmed) {
-        }
-      });
+      restaCart(id);
     }
   };
 
   return (
     <Stack
-      spacing={1}
       direction="row"
+      justifyContent="center"
+      alignItems="center"
       sx={{
-        justifyContent: "center",
-        alignItems: "center",
-        border: "1px solid #ccc",
-        borderRadius: "15px",
         padding: "4px",
       }}
     >
-      <IconButton color="secondary" onClick={restar}>
-        <Remove />
-      </IconButton>
-      <Button variant="outlined" sx={{ fontSize: "16px", fontWeight: "900" }}>
-        {contador}
-      </Button>
-      <IconButton color="primary" onClick={sumar}>
-        <Add />
-      </IconButton>
-      <IconButton color="error" onClick={() => eliminarProductoPorID(id)}>
-        <Delete />
-      </IconButton>
+      <Stack
+        spacing={1}
+        direction="row"
+        sx={{
+          margin: "2px",
+          justifyContent: "center",
+          alignItems: "center",
+          border: "1px solid #ccc",
+          borderRadius: "15px",
+          padding: "4px",
+        }}
+      >
+        <IconButton color="secondary" onClick={restar}>
+          <Remove />
+        </IconButton>
+        <Button
+          variant="contained"
+          sx={{ fontSize: "16px", fontWeight: "900" }}
+        >
+          {contador}
+        </Button>
+        <IconButton color="primary" onClick={sumar}>
+          <Add />
+        </IconButton>
+      </Stack>
+      <Stack
+        sx={{
+          margin: "2px",
+          border: "1px solid #ccc",
+          borderRadius: "15px",
+          padding: "1px",
+        }}
+      >
+        <IconButton color="error" onClick={() => eliminarProductoPorID(id)}>
+          <Delete sx={{ fontSize: 30 }} />
+        </IconButton>
+      </Stack>
     </Stack>
   );
 };

@@ -65,9 +65,46 @@ const CartContextComponent = ({ children }) => {
     }
   };
 
+  const restaCart = (id) => {
+    let exist = isInCart(id);
+    if (exist) {
+      let nuevosProd = cart.map((elemento) => {
+        if (elemento.id === id) {
+          return {
+            ...elemento,
+            quantity: elemento.quantity - 1,
+          };
+        } else {
+          return elemento;
+        }
+      });
+      setCart(nuevosProd);
+      localStorage.setItem("cart", JSON.stringify(nuevosProd));
+    }
+  };
+  const sumaCart = (id) => {
+    let exist = isInCart(id);
+    if (exist) {
+      let nuevosProd = cart.map((elemento) => {
+        if (elemento.id === id) {
+          return {
+            ...elemento,
+            quantity: elemento.quantity + 1,
+          };
+        } else {
+          return elemento;
+        }
+      });
+      setCart(nuevosProd);
+      localStorage.setItem("cart", JSON.stringify(nuevosProd));
+    }
+  };
+
   let data = {
     cart,
     addToCart,
+    restaCart,
+    sumaCart,
     getQuantityById,
     emptyCart,
     deleteProductById,

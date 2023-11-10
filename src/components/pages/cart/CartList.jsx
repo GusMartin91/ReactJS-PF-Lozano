@@ -20,12 +20,15 @@ const CartList = () => {
   const {
     cart,
     emptyCart,
+    sumaCart,
+    restaCart,
     deleteProductById,
     getTotalQuantity,
     getTotalPrice,
   } = useContext(CartContext);
 
   let precioTotal = getTotalPrice();
+  let cantidadTotal = getTotalQuantity();
 
   const vaciarCarrito = () => {
     Swal.fire({
@@ -61,7 +64,7 @@ const CartList = () => {
   return (
     <Container maxWidth="lg" sx={{ marginTop: "20px", marginBottom: "20px" }}>
       <h1 style={{ margin: "25px", textAlign: "center" }}>
-        ¡Estoy en el Carrito!
+        ¡Estas en el Carrito!
       </h1>
       <Box
         sx={{
@@ -74,8 +77,8 @@ const CartList = () => {
           variant="contained"
           onClick={vaciarCarrito}
           sx={{
-            marginTop: "-50px",
-            marginBottom: "20px",
+            marginTop: "-40px",
+            marginBottom: "10px",
             backgroundColor: "crimson",
             color: "white",
             "&:hover": {
@@ -87,9 +90,34 @@ const CartList = () => {
           Vaciar Carrito
         </Button>
       </Box>
-      <Grid container spacing={2} justifyContent="center">
+      <h3
+        style={{
+          textAlign: "end",
+          marginBottom: "10px",
+          fontWeight: "bold",
+          color: "blue",
+        }}
+      >
+        Productos en el carrito:{" "}
+        <span
+          style={{
+            fontWeight: 900,
+            fontSize: "20px",
+          }}
+        >
+          ( {cantidadTotal} )
+        </span>
+      </h3>
+      <Grid container justifyContent="center">
         {cart.map((product) => (
-          <Grid item key={product.id}>
+          <Grid
+            item
+            key={product.id}
+            style={{
+              margin: "10px",
+              width: "100%",
+            }}
+          >
             <Card sx={{ display: "flex" }}>
               <CardMedia
                 component="img"
@@ -97,7 +125,7 @@ const CartList = () => {
                 alt={product.alt}
                 sx={{ width: 140 }}
               />
-              <CardContent sx={{ padding: "2px" }}>
+              <CardContent sx={{ flex: 1, padding: "5px", minWidth: 0 }}>
                 <Typography gutterBottom variant="h5" component="div">
                   {product.title}
                 </Typography>
@@ -117,12 +145,35 @@ const CartList = () => {
                   .- ({product.quantity} unidades)
                 </Typography>
               </CardContent>
-              <CardActions sx={{ display: "flex", width: "300px" }}>
+              <CardActions
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "250px",
+                  marginLeft: "auto",
+                }}
+              >
+                <Typography variant="body2" color="text.secondary">
+                  <span style={{ fontWeight: "bold", fontSize: "18px" }}>
+                    Stock:{" "}
+                  </span>
+                  <span
+                    style={{
+                      fontWeight: 900,
+                      color: "#2dba24",
+                      fontSize: "20px",
+                    }}
+                  >
+                    ( {product.stock} )
+                  </span>
+                </Typography>
                 <CartCounter
                   stock={product.stock}
                   initialCount={product.quantity}
                   id={product.id}
                   eliminarProductoPorID={eliminarProductoPorID}
+                  restaCart={restaCart}
+                  sumaCart={sumaCart}
                 />
               </CardActions>
             </Card>
@@ -133,12 +184,14 @@ const CartList = () => {
         to="/checkout"
         style={{
           textDecoration: "none",
-          display: "block",
-          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+          width: "fit-content",
+          margin: "0 auto",
         }}
       >
         <Button variant="contained" sx={{ margin: "20px" }}>
-          Total a Pagar: {" "}
+          Total a Pagar:{"  "}
           <span style={{ fontWeight: "bolder", fontSize: "18px" }}>
             ${precioTotal.toFixed(2)}.-
           </span>

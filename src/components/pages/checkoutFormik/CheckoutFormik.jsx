@@ -1,17 +1,6 @@
-import {
-  Button,
-  TextField,
-  Typography,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../context/CartContext";
 import { serverTimestamp } from "firebase/firestore";
@@ -24,28 +13,11 @@ const CheckoutFormik = () => {
   const { cart, getTotalPrice, emptyCart } = useContext(CartContext);
   const total = getTotalPrice();
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleClickShowRepeatPassword = () => {
-    setShowRepeatPassword(!showRepeatPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const { handleChange, handleSubmit, handleReset, errors } = useFormik({
     initialValues: {
       nombre: "",
       apellido: "",
       email: "",
-      // password: "",
-      // repeatPassword: "",
     },
 
     onSubmit: async (data) => {
@@ -86,35 +58,41 @@ const CheckoutFormik = () => {
 
     validationSchema: Yup.object({
       nombre: Yup.string()
-        .required("El campo es obligatorio")
-        .min(5, "Debe tener al menos 5 caracteres")
-        .max(20, "No debe superar los 20 caracteres"),
-      apellido: Yup.string().required("El campo es obligatorio"),
+        .required("El campo es obligatorio.")
+        .min(5, "Debe tener al menos 5 caracteres.")
+        .max(20, "No debe superar los 20 caracteres.")
+        .matches(
+          /^[A-Za-z]+$/,
+          "Solo se permiten caracteres alfabéticos en el nombre."
+        ),
+      apellido: Yup.string()
+        .required("El campo es obligatorio.")
+        .min(5, "Debe tener al menos 5 caracteres.")
+        .max(20, "No debe superar los 20 caracteres.")
+        .matches(
+          /^[A-Za-z]+$/,
+          "Solo se permiten caracteres alfabéticos en el apellido."
+        ),
       email: Yup.string()
-        .email("El email no parece valido, debe contener @")
-        .required("El campo es obligatorio"),
-      // password: Yup.string()
-      //   .required("El campo es obligatorio")
-      //   .matches(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,15}$/, {
-      //     message:
-      //       "La contraseña debe tener al menos una mayúscula, una minúscula, un número y un símbolo",
-      //   }),
-      // repeatPassword: Yup.string()
-      //   .required("El campo es obligatorio")
-      //   .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
+        .email("El email no parece valido, debe contener @.")
+        .required("El campo es obligatorio."),
     }),
   });
-
   return (
     <div
       style={{
+        marginTop: "20px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
       }}
     >
+      <Typography variant="h3" gutterBottom>
+        Checkout
+      </Typography>
+      <Typography variant="h5" gutterBottom>
+        ¡Ingresa tus datos para la facturación!
+      </Typography>
       {orderId ? (
         <div>
           <Typography variant="h5">
@@ -137,15 +115,15 @@ const CheckoutFormik = () => {
             alignItems: "center",
             width: "450px",
             padding: "20px",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "#fff",
+            border: "2px solid #ccc",
+            borderRadius: "18px",
+            boxShadow: "10px 10px 6px rgba(0, 0, 0, 0.2)",
           }}
         >
           <Typography variant="h5" gutterBottom>
             Mi Formulario
           </Typography>
-
           <TextField
             label="Nombre"
             variant="outlined"
@@ -155,7 +133,6 @@ const CheckoutFormik = () => {
             helperText={errors.nombre}
             style={{ width: "100%", marginBottom: "10px" }}
           />
-
           <TextField
             label="Apellido"
             variant="outlined"
@@ -165,7 +142,6 @@ const CheckoutFormik = () => {
             helperText={errors.apellido}
             style={{ width: "100%", marginBottom: "10px" }}
           />
-
           <TextField
             label="Email"
             variant="outlined"
@@ -175,69 +151,6 @@ const CheckoutFormik = () => {
             helperText={errors.email}
             style={{ width: "100%", marginBottom: "10px" }}
           />
-          {/* <FormControl
-            sx={{ width: "100%", marginBottom: "10px" }}
-            variant="outlined"
-          >
-            <InputLabel htmlFor="outlined-adornment-password">
-              Contraseña
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              onChange={handleChange}
-              error={errors.password ? true : false}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Contraseña"
-            />
-            {errors.password && (
-              <Typography color="error">{errors.password}</Typography>
-            )}
-          </FormControl>
-
-          <FormControl
-            sx={{ width: "100%", marginBottom: "10px" }}
-            variant="outlined"
-          >
-            <InputLabel htmlFor="outlined-adornment-repeat-password">
-              Repetir Contraseña
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-repeat-password"
-              type={showRepeatPassword ? "text" : "password"}
-              name="repeatPassword"
-              onChange={handleChange}
-              error={errors.repeatPassword ? true : false}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle repeat password visibility"
-                    onClick={handleClickShowRepeatPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showRepeatPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Repetir Contraseña"
-            />
-            {errors.repeatPassword && (
-              <Typography color="error">{errors.repeatPassword}</Typography>
-            )}
-          </FormControl> */}
           <div
             style={{
               display: "flex",
@@ -250,13 +163,12 @@ const CheckoutFormik = () => {
               type="submit"
               style={{
                 marginTop: "10px",
-                backgroundColor: "#4CAF50",
+                backgroundColor: "#2CAF50",
                 width: "32%",
               }}
             >
               Enviar
             </Button>
-
             <Button
               variant="contained"
               type="reset"
@@ -275,9 +187,16 @@ const CheckoutFormik = () => {
                 marginTop: "10px",
                 backgroundColor: "gray",
                 width: "32%",
+                textDecoration: "none",
+                color: "inherit",
               }}
             >
-              Cancelar
+              <Link
+                to="/cart"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Volver
+              </Link>
             </Button>
           </div>
         </form>
