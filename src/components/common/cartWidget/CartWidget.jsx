@@ -23,7 +23,8 @@ const CartWidget = () => {
     <Link to="/cart">
       <IconButton color="tertiary" aria-label="cart">
         <StyledBadge
-          badgeContent={cart.length === 0 ? "0" : cart.length}
+          badgeContent={cart.length}
+          showZero
           color="secondary"
           max={99}
         >
