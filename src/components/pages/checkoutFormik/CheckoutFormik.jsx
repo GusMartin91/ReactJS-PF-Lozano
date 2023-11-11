@@ -17,6 +17,7 @@ const CheckoutFormik = () => {
     initialValues: {
       nombre: "",
       apellido: "",
+      telefono: "",
       email: "",
     },
 
@@ -73,6 +74,11 @@ const CheckoutFormik = () => {
           /^[A-Za-z]+$/,
           "Solo se permiten caracteres alfabéticos en el apellido."
         ),
+      telefono: Yup.string()
+        .matches(/^[0-9]+$/, "El teléfono solo puede contener números")
+        .min(8, "Debe tener al menos 8 dígitos")
+        .max(15, "No debe superar los 15 dígitos")
+        .required("El campo es obligatorio."),
       email: Yup.string()
         .email("El email no parece valido, debe contener @.")
         .required("El campo es obligatorio."),
@@ -140,6 +146,15 @@ const CheckoutFormik = () => {
             onChange={handleChange}
             error={errors.apellido ? true : false}
             helperText={errors.apellido}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+          <TextField
+            label="Teléfono"
+            variant="outlined"
+            name="telefono"
+            onChange={handleChange}
+            error={errors.telefono ? true : false}
+            helperText={errors.telefono}
             style={{ width: "100%", marginBottom: "10px" }}
           />
           <TextField
